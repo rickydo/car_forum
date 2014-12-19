@@ -69,10 +69,7 @@
 <datatype>INTEGER</datatype>
 <default>NULL</default><relation table="User" row="id" />
 </row>
-<row name="image" null="1" autoincrement="0">
-<datatype>VARCHAR</datatype>
-<default>NULL</default></row>
-<row name="text" null="1" autoincrement="0">
+<row name="content" null="1" autoincrement="0">
 <datatype>VARCHAR</datatype>
 <default>NULL</default></row>
 <key type="PRIMARY" name="">

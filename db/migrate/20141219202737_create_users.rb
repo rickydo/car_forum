@@ -8,7 +8,7 @@ class CreateUsers < ActiveRecord::Migration
     	t.string		:state
     	t.string		:email
     	t.integer		:number_of_posts
-    	t.string		:clearance
+    	t.string		:clearance, :default => "regular"
       t.timestamps
     end
   end
