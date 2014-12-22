@@ -9,7 +9,7 @@ class CreateUsers < ActiveRecord::Migration
     	t.string		:state
     	t.string		:email
     	t.integer		:number_of_posts
-    	t.string		:clearance, :default => "regular"
+    	t.string		:clearance, :default => "registered"
       t.timestamps
     end
   end

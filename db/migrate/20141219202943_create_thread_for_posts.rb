@@ -1,12 +1,14 @@
 class CreateThreadForPosts < ActiveRecord::Migration
   def change
     create_table :thread_for_posts do |t|
-    	t.string		:subject
-    	t.string		:text
-    	t.belongs_to	:category_id
+    	t.string		   :subject
+    	t.string		   :text
+    	t.belongs_to	 :category_id
+      t.belongs_to   :user_id
     	t.boolean		:stickied, :default => false
-      	t.timestamps
+      t.timestamps
     end
   end
   add_index :thread_for_posts, :category_id
+  add_index :thread_for_posts, :user_id
 end

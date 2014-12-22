@@ -76,7 +76,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="488" y="118" name="posts">
+<table x="595" y="105" name="posts">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -106,7 +106,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="709" y="131" name="thread">
+<table x="729" y="290" name="thread">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -123,6 +123,10 @@
 <row name="stickied?" null="1" autoincrement="0">
 <datatype>VARCHAR</datatype>
 <default>NULL</default></row>
+<row name="user_id" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="User" row="id" />
+</row>
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>
