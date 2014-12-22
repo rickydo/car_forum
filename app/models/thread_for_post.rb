@@ -6,5 +6,8 @@ class ThreadForPost < ActiveRecord::Base
 	validates :text, presence: true 
 
 	after_create :update_post_count
-	include Update
+	# include UpdateRecords
+	def update_post_count
+		current_user.number_of_posts += 1
+	end
 end
