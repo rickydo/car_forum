@@ -1,7 +1,7 @@
-admin = User.create!(first_name: "Rick", last_name: "Do", username: "rickyd", city: "Houston", state: "Texas", number_of_posts: 0, clearance: "admin", password: "password", password_confirmation: "password")
-mod = User.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, username: "mod_1", city: "Houston", state: "Texas", number_of_posts: 0, clearance: "moderator", password: "password", password_confirmation: "password")
-user_1 = User.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, username: "user_1", city: "Houston", state: "Texas", number_of_posts: 0, clearance: "registered", password: "password", password_confirmation: "password")
-user_2 = User.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, username: "user_2", city: "Houston", state: "Texas", number_of_posts: 0, clearance: "registered", password: "password", password_confirmation: "password")
+admin = User.create!(first_name: "Rick", last_name: "Do", username: "rickyd", email: "datvietburrido@gmail.com", city: "Houston", state: "Texas", number_of_posts: 0, clearance: "admin", password: "password", password_confirmation: "password")
+mod = User.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, username: "mod_1", email: "g3tdo@yahoo.com", city: "Houston", state: "Texas", number_of_posts: 0, clearance: "moderator", password: "password", password_confirmation: "password")
+user_1 = User.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, username: "user_1", email: "ricky.dop@gmail.com", city: "Houston", state: "Texas", number_of_posts: 0, clearance: "registered", password: "password", password_confirmation: "password")
+user_2 = User.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, username: "user_2", email: "tuantonyd@gmail.com", city: "Houston", state: "Texas", number_of_posts: 0, clearance: "registered", password: "password", password_confirmation: "password")
 
 Signature.create!(user_id: admin.id, content: "Boss Signature")
 Signature.create!(user_id: mod.id, content: "Moderator's Sig")
@@ -18,11 +18,11 @@ Category.create!(name: "Tires")
 Category.create!(name: "Wheels")
 
 
-t1 = ThreadForPost.create!(subject: Faker::Hacker.ingverb + Faker::Hacker.adjective + Faker::Hacker.noun, text: Faker::Hacker.say_something_smart, user_id: mod.id, category_id: intro.id)
-t2 = ThreadForPost.create!(subject: Faker::Hacker.ingverb + Faker::Hacker.adjective + Faker::Hacker.noun, text: Faker::Hacker.say_something_smart, user_id: user_1.id, category_id: sales.id )
-t3 = ThreadForPost.create!(subject: Faker::Hacker.ingverb + Faker::Hacker.adjective + Faker::Hacker.noun, text: Faker::Hacker.say_something_smart, user_id: user_2.id, category_id: gd.id)
-t4 = ThreadForPost.create!(subject: Faker::Hacker.ingverb + Faker::Hacker.adjective + Faker::Hacker.noun, text: Faker::Hacker.say_something_smart, user_id: user_1.id , category_id: gd.id)
-t5 = ThreadForPost.create!(subject: Faker::Hacker.ingverb + Faker::Hacker.adjective + Faker::Hacker.noun, text: Faker::Hacker.say_something_smart, user_id: admin.id , category_id: repair.id, stickied: true )
+t1 = ThreadForPost.create!(subject: Faker::Hacker.ingverb + " " +  Faker::Hacker.adjective + " " + Faker::Hacker.noun, text: Faker::Hacker.say_something_smart, user_id: mod.id, category_id: intro.id)
+t2 = ThreadForPost.create!(subject: Faker::Hacker.ingverb + " " +  Faker::Hacker.adjective + " " + Faker::Hacker.noun, text: Faker::Hacker.say_something_smart, user_id: user_1.id, category_id: sales.id )
+t3 = ThreadForPost.create!(subject: Faker::Hacker.ingverb + " " +  Faker::Hacker.adjective + " " + Faker::Hacker.noun, text: Faker::Hacker.say_something_smart, user_id: user_2.id, category_id: gd.id)
+t4 = ThreadForPost.create!(subject: Faker::Hacker.ingverb + " " + Faker::Hacker.adjective + " " + Faker::Hacker.noun, text: Faker::Hacker.say_something_smart, user_id: user_1.id , category_id: gd.id)
+t5 = ThreadForPost.create!(subject: Faker::Hacker.ingverb + " " + Faker::Hacker.adjective + " " + Faker::Hacker.noun, text: Faker::Hacker.say_something_smart, user_id: admin.id , category_id: repair.id, stickied: true )
 
 Post.create!(text: Faker::Lorem.paragraph, user_id: admin.id , thread_for_posts_id: t1.id )
 Post.create!(text: Faker::Lorem.paragraph, user_id: mod.id, thread_for_posts_id: t2.id )
