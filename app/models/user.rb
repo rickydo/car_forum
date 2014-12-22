@@ -8,3 +8,5 @@ class User < ActiveRecord::Base
 	validate :last_name, presence: true
 	validate :email, presence: true, format: /@/
 end
+
+	

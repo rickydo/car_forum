@@ -4,4 +4,7 @@ class ThreadForPost < ActiveRecord::Base
 
 	validates :subject, presence: true
 	validates :text, presence: true 
+
+	after_create :update_post_count
+	include Update
 end
