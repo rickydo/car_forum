@@ -5,7 +5,6 @@ class CreateSignatures < ActiveRecord::Migration
     	t.string			:content
       	t.timestamps
     end
+	  add_index :signatures, :user_id
   end
-
-  add_index :signatures, :user_id
 end

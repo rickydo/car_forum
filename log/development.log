@@ -1,0 +1,394 @@
+  [1m[36m (18.5ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" character varying(255) NOT NULL) [0m
+  [1m[35m (6.7ms)[0m  CREATE UNIQUE INDEX  "unique_schema_migrations" ON "schema_migrations"  ("version")
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateUsers (20141219202737)
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (26.9ms)[0m  [1mCREATE TABLE "users" ("id" serial primary key, "username" character varying(255), "first_name" character varying(255), "last_name" character varying(255), "password_digest" character varying(255), "city" character varying(255), "state" character varying(255), "email" character varying(255), "number_of_posts" integer, "clearance" character varying(255) DEFAULT 'registered', "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35mSQL (5.9ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20141219202737"]]
+  [1m[36m (6.4ms)[0m  [1mCOMMIT[0m
+Migrating to CreatePosts (20141219202835)
+  [1m[35m (0.3ms)[0m  CREATE  INDEX  "index_posts_on_user_id" ON "posts"  ("user_id")
+PG::UndefinedTable: ERROR:  relation "posts" does not exist
+: CREATE  INDEX  "index_posts_on_user_id" ON "posts"  ("user_id")
+  [1m[36m (0.5ms)[0m  [1mCREATE  INDEX  "index_posts_on_user_id" ON "posts"  ("user_id")[0m
+PG::UndefinedTable: ERROR:  relation "posts" does not exist
+: CREATE  INDEX  "index_posts_on_user_id" ON "posts"  ("user_id")
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreatePosts (20141219202835)
+  [1m[35m (0.3ms)[0m  CREATE  INDEX  "index_posts_on_user_id" ON "posts"  ("user_id")
+PG::UndefinedTable: ERROR:  relation "posts" does not exist
+: CREATE  INDEX  "index_posts_on_user_id" ON "posts"  ("user_id")
+  [1m[36m (0.2ms)[0m  [1mCREATE  INDEX  "index_posts_on_user_id" ON "posts"  ("user_id")[0m
+PG::UndefinedTable: ERROR:  relation "posts" does not exist
+: CREATE  INDEX  "index_posts_on_user_id" ON "posts"  ("user_id")
+  [1m[36m (2.6ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" character varying(255) NOT NULL) [0m
+  [1m[35m (2.1ms)[0m  CREATE UNIQUE INDEX  "unique_schema_migrations" ON "schema_migrations"  ("version")
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateUsers (20141219202737)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (4.0ms)[0m  [1mCREATE TABLE "users" ("id" serial primary key, "username" character varying(255), "first_name" character varying(255), "last_name" character varying(255), "password_digest" character varying(255), "city" character varying(255), "state" character varying(255), "email" character varying(255), "number_of_posts" integer, "clearance" character varying(255) DEFAULT 'registered', "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20141219202737"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+Migrating to CreatePosts (20141219202835)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (2.1ms)[0m  [1mCREATE TABLE "posts" ("id" serial primary key, "text" character varying(255), "user_id" integer, "thread_for_posts_id" integer, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (0.8ms)[0m  CREATE  INDEX  "index_posts_on_user_id" ON "posts"  ("user_id")
+  [1m[36m (0.8ms)[0m  [1mCREATE  INDEX  "index_posts_on_thread_for_posts_id" ON "posts"  ("thread_for_posts_id")[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20141219202835"]]
+  [1m[36m (0.7ms)[0m  [1mCOMMIT[0m
+Migrating to CreateSignatures (20141219202851)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (1.8ms)[0m  [1mCREATE TABLE "signatures" ("id" serial primary key, "user_id" integer, "content" character varying(255), "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (0.8ms)[0m  CREATE  INDEX  "index_signatures_on_user_id" ON "signatures"  ("user_id")
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20141219202851"]]
+  [1m[35m (0.5ms)[0m  COMMIT
+Migrating to CreateThreadForPosts (20141219202943)
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (14.8ms)[0m  CREATE TABLE "thread_for_posts" ("id" serial primary key, "subject" character varying(255), "text" character varying(255), "category_id" integer, "user_id" integer, "stickied" boolean DEFAULT 'f', "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (6.1ms)[0m  [1mCREATE  INDEX  "index_thread_for_posts_on_category_id" ON "thread_for_posts"  ("category_id")[0m
+  [1m[35m (0.8ms)[0m  CREATE  INDEX  "index_thread_for_posts_on_user_id" ON "thread_for_posts"  ("user_id")
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20141219202943"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+Migrating to CreateCategories (20141219202951)
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35m (1.9ms)[0m  CREATE TABLE "categories" ("id" serial primary key, "name" character varying(255), "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20141219202951"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (1.1ms)[0m  [1mINSERT INTO "users" ("city", "clearance", "created_at", "first_name", "last_name", "number_of_posts", "password_digest", "state", "updated_at", "username") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["city", "Houston"], ["clearance", "admin"], ["created_at", "2014-12-22 17:59:06.394949"], ["first_name", "Rick"], ["last_name", "Do"], ["number_of_posts", 0], ["password_digest", "$2a$10$60nt5N8Wv.P./NhjBxf4L.bPzYE8.bFvSlyXJwK830lB4bax2W04m"], ["state", "Texas"], ["updated_at", "2014-12-22 17:59:06.394949"], ["username", "rickyd"]]
+  [1m[35m (0.6ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("city", "clearance", "created_at", "first_name", "last_name", "number_of_posts", "password_digest", "state", "updated_at", "username") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"  [["city", "Houston"], ["clearance", "moderator"], ["created_at", "2014-12-22 17:59:06.962425"], ["first_name", "Devin"], ["last_name", "Conroy"], ["number_of_posts", 0], ["password_digest", "$2a$10$95fvPd2M04GHcIX3QaYT/.L0DhpGAhE7xcLBNAvxhj88Aqv9r8sK6"], ["state", "Texas"], ["updated_at", "2014-12-22 17:59:06.962425"], ["username", "mod_1"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "users" ("city", "created_at", "first_name", "last_name", "number_of_posts", "password_digest", "state", "updated_at", "username") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["city", "Houston"], ["created_at", "2014-12-22 17:59:07.049686"], ["first_name", "Glennie"], ["last_name", "Mills"], ["number_of_posts", 0], ["password_digest", "$2a$10$K5cHpRFT8HQbyTTNmXELw.1Doe4cg5BwMiYfhxgr443wedlbepzRq"], ["state", "Texas"], ["updated_at", "2014-12-22 17:59:07.049686"], ["username", "user_1"]]
+  [1m[35m (0.5ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("city", "created_at", "first_name", "last_name", "number_of_posts", "password_digest", "state", "updated_at", "username") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"  [["city", "Houston"], ["created_at", "2014-12-22 17:59:07.138042"], ["first_name", "Mervin"], ["last_name", "Haley"], ["number_of_posts", 0], ["password_digest", "$2a$10$W7kB9hXNtgSiLxv2IiQu.ezz0a6OdqOTPah1EFYstHgE.hLxm2fBu"], ["state", "Texas"], ["updated_at", "2014-12-22 17:59:07.138042"], ["username", "user_2"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (12.0ms)[0m  [1mINSERT INTO "signatures" ("content", "created_at", "updated_at", "user_id") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["content", "Boss Signature"], ["created_at", "2014-12-22 17:59:07.154152"], ["updated_at", "2014-12-22 17:59:07.154152"], ["user_id", 1]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "signatures" ("content", "created_at", "updated_at", "user_id") VALUES ($1, $2, $3, $4) RETURNING "id"  [["content", "Moderator's Sig"], ["created_at", "2014-12-22 17:59:07.168565"], ["updated_at", "2014-12-22 17:59:07.168565"], ["user_id", 2]]
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "signatures" ("content", "created_at", "updated_at", "user_id") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["content", "User 1 Signature"], ["created_at", "2014-12-22 17:59:07.170153"], ["updated_at", "2014-12-22 17:59:07.170153"], ["user_id", 3]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "signatures" ("content", "created_at", "updated_at", "user_id") VALUES ($1, $2, $3, $4) RETURNING "id"  [["content", "User 2 Sig"], ["created_at", "2014-12-22 17:59:07.171612"], ["updated_at", "2014-12-22 17:59:07.171612"], ["user_id", 4]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "categories" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-12-22 17:59:07.179953"], ["name", "Introduction"], ["updated_at", "2014-12-22 17:59:07.179953"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "categories" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-12-22 17:59:07.182396"], ["name", "General Discussion"], ["updated_at", "2014-12-22 17:59:07.182396"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "categories" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-12-22 17:59:07.183738"], ["name", "Classifieds"], ["updated_at", "2014-12-22 17:59:07.183738"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "categories" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-12-22 17:59:07.185249"], ["name", "Maintenance"], ["updated_at", "2014-12-22 17:59:07.185249"]]
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "categories" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-12-22 17:59:07.186687"], ["name", "Appearance Mods"], ["updated_at", "2014-12-22 17:59:07.186687"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "categories" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-12-22 17:59:07.188052"], ["name", "Forced Induction"], ["updated_at", "2014-12-22 17:59:07.188052"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "categories" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-12-22 17:59:07.189433"], ["name", "Tires"], ["updated_at", "2014-12-22 17:59:07.189433"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "categories" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-12-22 17:59:07.190694"], ["name", "Wheels"], ["updated_at", "2014-12-22 17:59:07.190694"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "users" ("city", "clearance", "created_at", "first_name", "last_name", "number_of_posts", "password_digest", "state", "updated_at", "username") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["city", "Houston"], ["clearance", "admin"], ["created_at", "2014-12-22 17:59:39.677208"], ["first_name", "Rick"], ["last_name", "Do"], ["number_of_posts", 0], ["password_digest", "$2a$10$.5UY9.NaQ2Qjv8PpPBRUC.zfuIXR2DEgzjbLgZesrd/ghSWFw5ZDS"], ["state", "Texas"], ["updated_at", "2014-12-22 17:59:39.677208"], ["username", "rickyd"]]
+  [1m[35m (1.7ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "users" ("city", "clearance", "created_at", "first_name", "last_name", "number_of_posts", "password_digest", "state", "updated_at", "username") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"  [["city", "Houston"], ["clearance", "moderator"], ["created_at", "2014-12-22 17:59:40.202745"], ["first_name", "Issac"], ["last_name", "Streich"], ["number_of_posts", 0], ["password_digest", "$2a$10$w6ggNJ7fULrmXBnbWr.juObb40IzRDLnqrajRkmRIMU5Bd1d6gV8y"], ["state", "Texas"], ["updated_at", "2014-12-22 17:59:40.202745"], ["username", "mod_1"]]
+  [1m[36m (1.9ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "users" ("city", "created_at", "first_name", "last_name", "number_of_posts", "password_digest", "state", "updated_at", "username") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["city", "Houston"], ["created_at", "2014-12-22 17:59:40.293805"], ["first_name", "Octavia"], ["last_name", "Stanton"], ["number_of_posts", 0], ["password_digest", "$2a$10$HeTFAmONDnfeM5D4VZvtg.v8Kad5Lt2Y6K1bXo9/rR62c2EUdVnzm"], ["state", "Texas"], ["updated_at", "2014-12-22 17:59:40.293805"], ["username", "user_1"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "users" ("city", "created_at", "first_name", "last_name", "number_of_posts", "password_digest", "state", "updated_at", "username") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"  [["city", "Houston"], ["created_at", "2014-12-22 17:59:40.386035"], ["first_name", "Leonard"], ["last_name", "Carroll"], ["number_of_posts", 0], ["password_digest", "$2a$10$ComWNPglxUq31K2vWAVjYOxMpdfOVs/CCgUvdZMI/nLWkTmTGC4ku"], ["state", "Texas"], ["updated_at", "2014-12-22 17:59:40.386035"], ["username", "user_2"]]
+  [1m[36m (0.5ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "signatures" ("content", "created_at", "updated_at", "user_id") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["content", "Boss Signature"], ["created_at", "2014-12-22 17:59:40.404066"], ["updated_at", "2014-12-22 17:59:40.404066"], ["user_id", 5]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "signatures" ("content", "created_at", "updated_at", "user_id") VALUES ($1, $2, $3, $4) RETURNING "id"  [["content", "Moderator's Sig"], ["created_at", "2014-12-22 17:59:40.407170"], ["updated_at", "2014-12-22 17:59:40.407170"], ["user_id", 6]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "signatures" ("content", "created_at", "updated_at", "user_id") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["content", "User 1 Signature"], ["created_at", "2014-12-22 17:59:40.408910"], ["updated_at", "2014-12-22 17:59:40.408910"], ["user_id", 7]]
+  [1m[35m (0.2ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "signatures" ("content", "created_at", "updated_at", "user_id") VALUES ($1, $2, $3, $4) RETURNING "id"  [["content", "User 2 Sig"], ["created_at", "2014-12-22 17:59:40.410411"], ["updated_at", "2014-12-22 17:59:40.410411"], ["user_id", 8]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "categories" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-12-22 17:59:40.419830"], ["name", "Introduction"], ["updated_at", "2014-12-22 17:59:40.419830"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "categories" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-12-22 17:59:40.422059"], ["name", "General Discussion"], ["updated_at", "2014-12-22 17:59:40.422059"]]
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "categories" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-12-22 17:59:40.423428"], ["name", "Classifieds"], ["updated_at", "2014-12-22 17:59:40.423428"]]
+  [1m[35m (0.2ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "categories" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-12-22 17:59:40.424821"], ["name", "Maintenance"], ["updated_at", "2014-12-22 17:59:40.424821"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "categories" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-12-22 17:59:40.426282"], ["name", "Appearance Mods"], ["updated_at", "2014-12-22 17:59:40.426282"]]
+  [1m[35m (0.2ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "categories" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-12-22 17:59:40.427693"], ["name", "Forced Induction"], ["updated_at", "2014-12-22 17:59:40.427693"]]
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "categories" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-12-22 17:59:40.428988"], ["name", "Tires"], ["updated_at", "2014-12-22 17:59:40.428988"]]
+  [1m[35m (0.2ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "categories" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-12-22 17:59:40.430303"], ["name", "Wheels"], ["updated_at", "2014-12-22 17:59:40.430303"]]
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.7ms)[0m  [1mINSERT INTO "thread_for_posts" ("category_id", "created_at", "subject", "text", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["category_id", 9], ["created_at", "2014-12-22 17:59:40.443728"], ["subject", "synthesizingbluetoothalarm"], ["text", "Try to hack the RAM hard drive, maybe it will override the multi-byte port!"], ["updated_at", "2014-12-22 17:59:40.443728"], ["user_id", 6]]
+  [1m[35m (0.2ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "thread_for_posts" ("category_id", "created_at", "subject", "text", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["category_id", 11], ["created_at", "2014-12-22 17:59:40.447768"], ["subject", "copyinghapticfeed"], ["text", "If we transmit the program, we can get to the EXE alarm through the solid state SQL panel!"], ["updated_at", "2014-12-22 17:59:40.447768"], ["user_id", 7]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "thread_for_posts" ("category_id", "created_at", "subject", "text", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["category_id", 10], ["created_at", "2014-12-22 17:59:40.450530"], ["subject", "indexingredundantsystem"], ["text", "hacking the capacitor won't do anything, we need to calculate the bluetooth USB feed!"], ["updated_at", "2014-12-22 17:59:40.450530"], ["user_id", 8]]
+  [1m[35m (5.9ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "thread_for_posts" ("category_id", "created_at", "subject", "text", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["category_id", 10], ["created_at", "2014-12-22 17:59:40.459148"], ["subject", "calculatingdigitalpanel"], ["text", "Try to program the COM feed, maybe it will transmit the multi-byte alarm!"], ["updated_at", "2014-12-22 17:59:40.459148"], ["user_id", 7]]
+  [1m[36m (5.8ms)[0m  [1mCOMMIT[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.7ms)[0m  [1mINSERT INTO "users" ("city", "clearance", "created_at", "first_name", "last_name", "number_of_posts", "password_digest", "state", "updated_at", "username") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["city", "Houston"], ["clearance", "admin"], ["created_at", "2014-12-22 18:01:40.406909"], ["first_name", "Rick"], ["last_name", "Do"], ["number_of_posts", 0], ["password_digest", "$2a$10$bUpyModAPhP.orJi7cZpVOS14se0tAe8AcjAlEmh0tnSn5FrpyjuO"], ["state", "Texas"], ["updated_at", "2014-12-22 18:01:40.406909"], ["username", "rickyd"]]
+  [1m[35m (1.4ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("city", "clearance", "created_at", "first_name", "last_name", "number_of_posts", "password_digest", "state", "updated_at", "username") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"  [["city", "Houston"], ["clearance", "moderator"], ["created_at", "2014-12-22 18:01:40.924811"], ["first_name", "Ezequiel"], ["last_name", "Abbott"], ["number_of_posts", 0], ["password_digest", "$2a$10$vde9ricyNZjMzYXeNmGcKeFL0NG0kHPRCwBNfwT8p/s.VSTueG/v2"], ["state", "Texas"], ["updated_at", "2014-12-22 18:01:40.924811"], ["username", "mod_1"]]
+  [1m[36m (1.8ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "users" ("city", "created_at", "first_name", "last_name", "number_of_posts", "password_digest", "state", "updated_at", "username") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["city", "Houston"], ["created_at", "2014-12-22 18:01:41.017938"], ["first_name", "Lindsey"], ["last_name", "Bruen"], ["number_of_posts", 0], ["password_digest", "$2a$10$P7b1bTQxfUIHPHUVhe5/lO0xH299e5NYbVqoyFjcOwMDY55NMLMH."], ["state", "Texas"], ["updated_at", "2014-12-22 18:01:41.017938"], ["username", "user_1"]]
+  [1m[35m (0.6ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "users" ("city", "created_at", "first_name", "last_name", "number_of_posts", "password_digest", "state", "updated_at", "username") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"  [["city", "Houston"], ["created_at", "2014-12-22 18:01:41.110323"], ["first_name", "Leonora"], ["last_name", "Wehner"], ["number_of_posts", 0], ["password_digest", "$2a$10$bcnigegNvaWI4otLaLYYQeNA2wpOVwOGI7rjvmzQ4cxYLhnaUdrJe"], ["state", "Texas"], ["updated_at", "2014-12-22 18:01:41.110323"], ["username", "user_2"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "signatures" ("content", "created_at", "updated_at", "user_id") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["content", "Boss Signature"], ["created_at", "2014-12-22 18:01:41.121340"], ["updated_at", "2014-12-22 18:01:41.121340"], ["user_id", 9]]
+  [1m[35m (0.5ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "signatures" ("content", "created_at", "updated_at", "user_id") VALUES ($1, $2, $3, $4) RETURNING "id"  [["content", "Moderator's Sig"], ["created_at", "2014-12-22 18:01:41.123699"], ["updated_at", "2014-12-22 18:01:41.123699"], ["user_id", 10]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "signatures" ("content", "created_at", "updated_at", "user_id") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["content", "User 1 Signature"], ["created_at", "2014-12-22 18:01:41.125151"], ["updated_at", "2014-12-22 18:01:41.125151"], ["user_id", 11]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "signatures" ("content", "created_at", "updated_at", "user_id") VALUES ($1, $2, $3, $4) RETURNING "id"  [["content", "User 2 Sig"], ["created_at", "2014-12-22 18:01:41.126524"], ["updated_at", "2014-12-22 18:01:41.126524"], ["user_id", 12]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "categories" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-12-22 18:01:41.134797"], ["name", "Introduction"], ["updated_at", "2014-12-22 18:01:41.134797"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "categories" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-12-22 18:01:41.137009"], ["name", "General Discussion"], ["updated_at", "2014-12-22 18:01:41.137009"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "categories" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-12-22 18:01:41.138435"], ["name", "Classifieds"], ["updated_at", "2014-12-22 18:01:41.138435"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "categories" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-12-22 18:01:41.139802"], ["name", "Maintenance"], ["updated_at", "2014-12-22 18:01:41.139802"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "categories" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-12-22 18:01:41.141298"], ["name", "Appearance Mods"], ["updated_at", "2014-12-22 18:01:41.141298"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "categories" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-12-22 18:01:41.142647"], ["name", "Forced Induction"], ["updated_at", "2014-12-22 18:01:41.142647"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "categories" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-12-22 18:01:41.144028"], ["name", "Tires"], ["updated_at", "2014-12-22 18:01:41.144028"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "categories" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-12-22 18:01:41.145328"], ["name", "Wheels"], ["updated_at", "2014-12-22 18:01:41.145328"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "thread_for_posts" ("category_id", "created_at", "subject", "text", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["category_id", 17], ["created_at", "2014-12-22 18:01:41.158083"], ["subject", "backing uphapticfeed"], ["text", "The PCI hard drive is down, input the online program so we can override the ADP card!"], ["updated_at", "2014-12-22 18:01:41.158083"], ["user_id", 10]]
+  [1m[35m (0.5ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "thread_for_posts" ("category_id", "created_at", "subject", "text", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["category_id", 19], ["created_at", "2014-12-22 18:01:41.161733"], ["subject", "copyingcross-platformbandwidth"], ["text", "Use the auxiliary XSS pixel, then you can generate the cross-platform driver!"], ["updated_at", "2014-12-22 18:01:41.161733"], ["user_id", 11]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "thread_for_posts" ("category_id", "created_at", "subject", "text", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["category_id", 18], ["created_at", "2014-12-22 18:01:41.164453"], ["subject", "bypassingvirtualbandwidth"], ["text", "You can't bypass the driver without quantifying the digital JBOD circuit!"], ["updated_at", "2014-12-22 18:01:41.164453"], ["user_id", 12]]
+  [1m[35m (0.5ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "thread_for_posts" ("category_id", "created_at", "subject", "text", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["category_id", 18], ["created_at", "2014-12-22 18:01:41.167209"], ["subject", "copyingneuralprotocol"], ["text", "Try to program the HDD system, maybe it will synthesize the 1080p panel!"], ["updated_at", "2014-12-22 18:01:41.167209"], ["user_id", 11]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "thread_for_posts" ("category_id", "created_at", "stickied", "subject", "text", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["category_id", 20], ["created_at", "2014-12-22 18:01:41.169842"], ["stickied", "t"], ["subject", "compressingneuralpixel"], ["text", "Try to input the EXE array, maybe it will bypass the multi-byte firewall!"], ["updated_at", "2014-12-22 18:01:41.169842"], ["user_id", 9]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mSQL (0.6ms)[0m  [1mINSERT INTO "users" ("city", "clearance", "created_at", "first_name", "last_name", "number_of_posts", "password_digest", "state", "updated_at", "username") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["city", "Houston"], ["clearance", "admin"], ["created_at", "2014-12-22 18:02:46.472544"], ["first_name", "Rick"], ["last_name", "Do"], ["number_of_posts", 0], ["password_digest", "$2a$10$KL8tAg526crKKoO97nM3wuEeK2KcBLiqZwk4iI6GO3t2N5RTMd76q"], ["state", "Texas"], ["updated_at", "2014-12-22 18:02:46.472544"], ["username", "rickyd"]]
+  [1m[35m (2.7ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  INSERT INTO "users" ("city", "clearance", "created_at", "first_name", "last_name", "number_of_posts", "password_digest", "state", "updated_at", "username") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"  [["city", "Houston"], ["clearance", "moderator"], ["created_at", "2014-12-22 18:02:46.989742"], ["first_name", "Leda"], ["last_name", "Breitenberg"], ["number_of_posts", 0], ["password_digest", "$2a$10$lpi5Txpni0UvP8/q4DOpf.YRfhJhORXMzE2yLAO1jBF89t7BiMvKS"], ["state", "Texas"], ["updated_at", "2014-12-22 18:02:46.989742"], ["username", "mod_1"]]
+  [1m[36m (2.0ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "users" ("city", "created_at", "first_name", "last_name", "number_of_posts", "password_digest", "state", "updated_at", "username") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["city", "Houston"], ["created_at", "2014-12-22 18:02:47.079102"], ["first_name", "Harley"], ["last_name", "Littel"], ["number_of_posts", 0], ["password_digest", "$2a$10$BpD2OaEKM7igMb0mgJlLeepTIITmWAB7bui9gBH2FCSKl9z7.43nK"], ["state", "Texas"], ["updated_at", "2014-12-22 18:02:47.079102"], ["username", "user_1"]]
+  [1m[35m (0.5ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "users" ("city", "created_at", "first_name", "last_name", "number_of_posts", "password_digest", "state", "updated_at", "username") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"  [["city", "Houston"], ["created_at", "2014-12-22 18:02:47.166064"], ["first_name", "Simone"], ["last_name", "Cassin"], ["number_of_posts", 0], ["password_digest", "$2a$10$NiL3PYpNjPGb9s2a70zU7udorOi.IeR.AnDEqVshxEDY4596HTCJy"], ["state", "Texas"], ["updated_at", "2014-12-22 18:02:47.166064"], ["username", "user_2"]]
+  [1m[36m (0.5ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "signatures" ("content", "created_at", "updated_at", "user_id") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["content", "Boss Signature"], ["created_at", "2014-12-22 18:02:47.177291"], ["updated_at", "2014-12-22 18:02:47.177291"], ["user_id", 13]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "signatures" ("content", "created_at", "updated_at", "user_id") VALUES ($1, $2, $3, $4) RETURNING "id"  [["content", "Moderator's Sig"], ["created_at", "2014-12-22 18:02:47.179509"], ["updated_at", "2014-12-22 18:02:47.179509"], ["user_id", 14]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "signatures" ("content", "created_at", "updated_at", "user_id") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["content", "User 1 Signature"], ["created_at", "2014-12-22 18:02:47.180909"], ["updated_at", "2014-12-22 18:02:47.180909"], ["user_id", 15]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "signatures" ("content", "created_at", "updated_at", "user_id") VALUES ($1, $2, $3, $4) RETURNING "id"  [["content", "User 2 Sig"], ["created_at", "2014-12-22 18:02:47.182304"], ["updated_at", "2014-12-22 18:02:47.182304"], ["user_id", 16]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "categories" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-12-22 18:02:47.190668"], ["name", "Introduction"], ["updated_at", "2014-12-22 18:02:47.190668"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "categories" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-12-22 18:02:47.192803"], ["name", "General Discussion"], ["updated_at", "2014-12-22 18:02:47.192803"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "categories" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-12-22 18:02:47.194102"], ["name", "Classifieds"], ["updated_at", "2014-12-22 18:02:47.194102"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "categories" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-12-22 18:02:47.195420"], ["name", "Maintenance"], ["updated_at", "2014-12-22 18:02:47.195420"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "categories" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-12-22 18:02:47.196732"], ["name", "Appearance Mods"], ["updated_at", "2014-12-22 18:02:47.196732"]]
+  [1m[35m (0.2ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "categories" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-12-22 18:02:47.197964"], ["name", "Forced Induction"], ["updated_at", "2014-12-22 18:02:47.197964"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "categories" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-12-22 18:02:47.199187"], ["name", "Tires"], ["updated_at", "2014-12-22 18:02:47.199187"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "categories" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-12-22 18:02:47.200608"], ["name", "Wheels"], ["updated_at", "2014-12-22 18:02:47.200608"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "thread_for_posts" ("category_id", "created_at", "subject", "text", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["category_id", 25], ["created_at", "2014-12-22 18:02:47.213835"], ["subject", "compressingprimarybus"], ["text", "We need to parse the solid state PCI system!"], ["updated_at", "2014-12-22 18:02:47.213835"], ["user_id", 14]]
+  [1m[35m (0.5ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "thread_for_posts" ("category_id", "created_at", "subject", "text", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["category_id", 27], ["created_at", "2014-12-22 18:02:47.217527"], ["subject", "connectinghapticfeed"], ["text", "Try to calculate the SMS array, maybe it will connect the 1080p hard drive!"], ["updated_at", "2014-12-22 18:02:47.217527"], ["user_id", 15]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "thread_for_posts" ("category_id", "created_at", "subject", "text", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["category_id", 26], ["created_at", "2014-12-22 18:02:47.220163"], ["subject", "navigatingmobileapplication"], ["text", "The SMTP program is down, navigate the virtual hard drive so we can synthesize the SSL firewall!"], ["updated_at", "2014-12-22 18:02:47.220163"], ["user_id", 16]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "thread_for_posts" ("category_id", "created_at", "subject", "text", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["category_id", 26], ["created_at", "2014-12-22 18:02:47.222733"], ["subject", "backing upmobileapplication"], ["text", "You can't generate the capacitor without calculating the bluetooth ADP protocol!"], ["updated_at", "2014-12-22 18:02:47.222733"], ["user_id", 15]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "thread_for_posts" ("category_id", "created_at", "stickied", "subject", "text", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["category_id", 28], ["created_at", "2014-12-22 18:02:47.225348"], ["stickied", "t"], ["subject", "overriding1080psensor"], ["text", "generating the pixel won't do anything, we need to back up the virtual XML sensor!"], ["updated_at", "2014-12-22 18:02:47.225348"], ["user_id", 13]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.7ms)[0m  [1mINSERT INTO "users" ("city", "clearance", "created_at", "first_name", "last_name", "number_of_posts", "password_digest", "state", "updated_at", "username") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["city", "Houston"], ["clearance", "admin"], ["created_at", "2014-12-22 18:03:00.550175"], ["first_name", "Rick"], ["last_name", "Do"], ["number_of_posts", 0], ["password_digest", "$2a$10$GImaRd4PEjaZnOrs6jBIKuSArk6qitDAdYNPJGYpgbQt6cOYcKrw6"], ["state", "Texas"], ["updated_at", "2014-12-22 18:03:00.550175"], ["username", "rickyd"]]
+  [1m[35m (2.7ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "users" ("city", "clearance", "created_at", "first_name", "last_name", "number_of_posts", "password_digest", "state", "updated_at", "username") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"  [["city", "Houston"], ["clearance", "moderator"], ["created_at", "2014-12-22 18:03:01.074718"], ["first_name", "Marilyne"], ["last_name", "Kautzer"], ["number_of_posts", 0], ["password_digest", "$2a$10$5uTpkEmLMmEeMORlAZgmhOuQyEOy/vcJQizc/ObBeBYXoNlTXZnKK"], ["state", "Texas"], ["updated_at", "2014-12-22 18:03:01.074718"], ["username", "mod_1"]]
+  [1m[36m (1.9ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "users" ("city", "created_at", "first_name", "last_name", "number_of_posts", "password_digest", "state", "updated_at", "username") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["city", "Houston"], ["created_at", "2014-12-22 18:03:01.166484"], ["first_name", "Maverick"], ["last_name", "Marvin"], ["number_of_posts", 0], ["password_digest", "$2a$10$5L2UJMdbNZr56Cfbqt9wGOsauWSfgBes5VB6CHrivteWqmDX3iWTK"], ["state", "Texas"], ["updated_at", "2014-12-22 18:03:01.166484"], ["username", "user_1"]]
+  [1m[35m (0.5ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("city", "created_at", "first_name", "last_name", "number_of_posts", "password_digest", "state", "updated_at", "username") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"  [["city", "Houston"], ["created_at", "2014-12-22 18:03:01.259885"], ["first_name", "Tristin"], ["last_name", "Stokes"], ["number_of_posts", 0], ["password_digest", "$2a$10$fSfJKOq/vBUrYJSULuwADOawMFpl2mzHYprYjbY3BMtfGgMPwXzCG"], ["state", "Texas"], ["updated_at", "2014-12-22 18:03:01.259885"], ["username", "user_2"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "signatures" ("content", "created_at", "updated_at", "user_id") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["content", "Boss Signature"], ["created_at", "2014-12-22 18:03:01.274205"], ["updated_at", "2014-12-22 18:03:01.274205"], ["user_id", 17]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "signatures" ("content", "created_at", "updated_at", "user_id") VALUES ($1, $2, $3, $4) RETURNING "id"  [["content", "Moderator's Sig"], ["created_at", "2014-12-22 18:03:01.276976"], ["updated_at", "2014-12-22 18:03:01.276976"], ["user_id", 18]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "signatures" ("content", "created_at", "updated_at", "user_id") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["content", "User 1 Signature"], ["created_at", "2014-12-22 18:03:01.278741"], ["updated_at", "2014-12-22 18:03:01.278741"], ["user_id", 19]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "signatures" ("content", "created_at", "updated_at", "user_id") VALUES ($1, $2, $3, $4) RETURNING "id"  [["content", "User 2 Sig"], ["created_at", "2014-12-22 18:03:01.280108"], ["updated_at", "2014-12-22 18:03:01.280108"], ["user_id", 20]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "categories" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-12-22 18:03:01.288180"], ["name", "Introduction"], ["updated_at", "2014-12-22 18:03:01.288180"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "categories" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-12-22 18:03:01.290313"], ["name", "General Discussion"], ["updated_at", "2014-12-22 18:03:01.290313"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "categories" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-12-22 18:03:01.291649"], ["name", "Classifieds"], ["updated_at", "2014-12-22 18:03:01.291649"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "categories" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-12-22 18:03:01.293127"], ["name", "Maintenance"], ["updated_at", "2014-12-22 18:03:01.293127"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "categories" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-12-22 18:03:01.294373"], ["name", "Appearance Mods"], ["updated_at", "2014-12-22 18:03:01.294373"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "categories" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-12-22 18:03:01.295610"], ["name", "Forced Induction"], ["updated_at", "2014-12-22 18:03:01.295610"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "categories" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-12-22 18:03:01.296902"], ["name", "Tires"], ["updated_at", "2014-12-22 18:03:01.296902"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "categories" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-12-22 18:03:01.298197"], ["name", "Wheels"], ["updated_at", "2014-12-22 18:03:01.298197"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "thread_for_posts" ("category_id", "created_at", "subject", "text", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["category_id", 33], ["created_at", "2014-12-22 18:03:01.310718"], ["subject", "transmitting1080psensor"], ["text", "Use the neural COM hard drive, then you can input the solid state system!"], ["updated_at", "2014-12-22 18:03:01.310718"], ["user_id", 18]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "thread_for_posts" ("category_id", "created_at", "subject", "text", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["category_id", 35], ["created_at", "2014-12-22 18:03:01.314112"], ["subject", "programmingback-endbus"], ["text", "overriding the matrix won't do anything, we need to transmit the cross-platform SMTP alarm!"], ["updated_at", "2014-12-22 18:03:01.314112"], ["user_id", 19]]
+  [1m[36m (0.5ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "thread_for_posts" ("category_id", "created_at", "subject", "text", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["category_id", 34], ["created_at", "2014-12-22 18:03:01.318809"], ["subject", "overridingvirtualtransmitter"], ["text", "Try to bypass the GB driver, maybe it will reboot the mobile alarm!"], ["updated_at", "2014-12-22 18:03:01.318809"], ["user_id", 20]]
+  [1m[35m (0.5ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "thread_for_posts" ("category_id", "created_at", "subject", "text", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["category_id", 34], ["created_at", "2014-12-22 18:03:01.322217"], ["subject", "synthesizingredundantprotocol"], ["text", "Try to connect the TCP system, maybe it will navigate the wireless sensor!"], ["updated_at", "2014-12-22 18:03:01.322217"], ["user_id", 19]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "thread_for_posts" ("category_id", "created_at", "stickied", "subject", "text", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["category_id", 36], ["created_at", "2014-12-22 18:03:01.324927"], ["stickied", "t"], ["subject", "copyingvirtualsystem"], ["text", "Use the back-end IB capacitor, then you can back up the cross-platform circuit!"], ["updated_at", "2014-12-22 18:03:01.324927"], ["user_id", 17]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.7ms)[0m  INSERT INTO "posts" ("created_at", "text", "thread_for_posts_id", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["created_at", "2014-12-22 18:03:01.334999"], ["text", "Distinctio consequatur maxime. Consequatur necessitatibus quae voluptates sit quia quia autem. Asperiores laboriosam rerum quidem porro optio nobis."], ["thread_for_posts_id", 15], ["updated_at", "2014-12-22 18:03:01.334999"], ["user_id", 17]]
+  [1m[36m (0.5ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "posts" ("created_at", "text", "thread_for_posts_id", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["created_at", "2014-12-22 18:03:01.338098"], ["text", "Iste eveniet vitae. Debitis quod voluptate cumque molestiae id sapiente sint. Nesciunt quia ducimus enim quis et dolor et. Minus qui sed accusamus dolorum."], ["thread_for_posts_id", 16], ["updated_at", "2014-12-22 18:03:01.338098"], ["user_id", 18]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "posts" ("created_at", "text", "thread_for_posts_id", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["created_at", "2014-12-22 18:03:01.339955"], ["text", "Perspiciatis consequuntur quibusdam nisi voluptatem enim quaerat. Molestiae et molestiae odio molestias aliquid. Rerum ratione quibusdam minus. Iusto eos non quisquam alias earum. Sint aspernatur occaecati fugit illum sint aperiam."], ["thread_for_posts_id", 17], ["updated_at", "2014-12-22 18:03:01.339955"], ["user_id", 18]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "posts" ("created_at", "text", "thread_for_posts_id", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["created_at", "2014-12-22 18:03:01.341670"], ["text", "Est eligendi est et repellat architecto voluptates hic. Tempora deleniti animi voluptatem minima ut enim. Inventore molestiae voluptate aliquid. Repellat est rerum rerum doloribus."], ["thread_for_posts_id", 18], ["updated_at", "2014-12-22 18:03:01.341670"], ["user_id", 19]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "posts" ("created_at", "text", "thread_for_posts_id", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["created_at", "2014-12-22 18:03:01.343549"], ["text", "Sapiente incidunt eaque et. Dolores a laborum quod. Dolores minus architecto nesciunt alias. Excepturi illum ullam delectus consequatur est perspiciatis. Qui voluptate itaque."], ["thread_for_posts_id", 17], ["updated_at", "2014-12-22 18:03:01.343549"], ["user_id", 19]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "posts" ("created_at", "text", "thread_for_posts_id", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["created_at", "2014-12-22 18:03:01.345390"], ["text", "Expedita debitis eaque facilis eum dolorem. Qui voluptas maiores debitis earum et. Veritatis tempora in hic quisquam qui voluptas. Tempore quis sunt animi id occaecati. Saepe dignissimos voluptatem et."], ["thread_for_posts_id", 16], ["updated_at", "2014-12-22 18:03:01.345390"], ["user_id", 19]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "posts" ("created_at", "text", "thread_for_posts_id", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["created_at", "2014-12-22 18:03:01.347229"], ["text", "Nam sequi quibusdam ea molestias nulla. Pariatur et qui architecto accusantium labore et. Nesciunt expedita dolorum. Non omnis exercitationem optio."], ["thread_for_posts_id", 19], ["updated_at", "2014-12-22 18:03:01.347229"], ["user_id", 19]]
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "posts" ("created_at", "text", "thread_for_posts_id", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["created_at", "2014-12-22 18:03:01.348863"], ["text", "Vero consequatur nobis dolor inventore. Eum aut fuga est velit ullam porro. Quibusdam aut sint velit deleniti ipsam fuga molestiae. Sapiente qui quam qui nostrum placeat enim pariatur."], ["thread_for_posts_id", 19], ["updated_at", "2014-12-22 18:03:01.348863"], ["user_id", 19]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "posts" ("created_at", "text", "thread_for_posts_id", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["created_at", "2014-12-22 18:03:01.350711"], ["text", "Voluptate quam labore quia odio. Qui rerum officiis provident ut. Et beatae dolor fugiat distinctio. Adipisci sint consectetur in nihil quibusdam. Nam commodi et inventore pariatur eum."], ["thread_for_posts_id", 15], ["updated_at", "2014-12-22 18:03:01.350711"], ["user_id", 20]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "posts" ("created_at", "text", "thread_for_posts_id", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["created_at", "2014-12-22 18:03:01.352432"], ["text", "Soluta commodi dolor. Sint debitis possimus dolores sapiente earum. Inventore veniam aut maiores id quaerat temporibus. Qui eum praesentium animi repudiandae."], ["thread_for_posts_id", 16], ["updated_at", "2014-12-22 18:03:01.352432"], ["user_id", 20]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "posts" ("created_at", "text", "thread_for_posts_id", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["created_at", "2014-12-22 18:03:01.354069"], ["text", "Tenetur reprehenderit est voluptatem consequuntur vel. Error qui reiciendis fuga. Qui laboriosam blanditiis excepturi libero ab. Et quae vitae et repellat sed. Fuga provident veritatis labore voluptates."], ["thread_for_posts_id", 18], ["updated_at", "2014-12-22 18:03:01.354069"], ["user_id", 20]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
