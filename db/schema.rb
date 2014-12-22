@@ -25,12 +25,12 @@ ActiveRecord::Schema.define(version: 20141219202951) do
   create_table "posts", force: true do |t|
     t.string   "text"
     t.integer  "user_id"
-    t.integer  "thread_for_posts_id"
+    t.integer  "thread_for_post_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "posts", ["thread_for_posts_id"], name: "index_posts_on_thread_for_posts_id", using: :btree
+  add_index "posts", ["thread_for_post_id"], name: "index_posts_on_thread_for_post_id", using: :btree
   add_index "posts", ["user_id"], name: "index_posts_on_user_id", using: :btree
 
   create_table "signatures", force: true do |t|

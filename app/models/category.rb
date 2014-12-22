@@ -1,3 +1,3 @@
 class Category < ActiveRecord::Base
-	has_many :threads
+	has_many :thread_for_posts
 end
