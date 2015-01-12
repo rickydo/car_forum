@@ -8,14 +8,14 @@ Signature.create!(user_id: mod.id, content: "Moderator's Sig")
 Signature.create!(user_id: user_1.id, content: "User 1 Signature")
 Signature.create!(user_id: user_2.id, content: "User 2 Sig")
 
-intro = Category.create!(name: "Introduction")
-gd = Category.create!(name: "General Discussion")
-sales = Category.create!(name: "Classifieds")
-repair = Category.create!(name: "Maintenance")
-Category.create!(name: "Appearance Mods")
-Category.create!(name: "Forced Induction")
-Category.create!(name: "Tires")
-Category.create!(name: "Wheels")
+intro = Category.create!(name: "Introduction", description: "Just joined the forum? Introduce yourself and your ride if you want.")
+gd = Category.create!(name: "General Discussion", description: "Talk about cars in general")
+sales = Category.create!(name: "Classifieds", description: "Want to sell or buy something? Post here")
+repair = Category.create!(name: "Maintenance", description: "Keep your vehicles running like new")
+Category.create!(name: "Appearance Mods", description: "To each their own")
+Category.create!(name: "Forced Induction", description: "Must...go...faster...zoom")
+Category.create!(name: "Tires", description: "Here lies the threads about tires."
+Category.create!(name: "Wheels", description: "Yes they are called wheels, not rims.")
 
 
 t1 = ThreadForPost.create!(subject: Faker::Hacker.ingverb + " " +  Faker::Hacker.adjective + " " + Faker::Hacker.noun, text: Faker::Hacker.say_something_smart, user_id: mod.id, category_id: intro.id)

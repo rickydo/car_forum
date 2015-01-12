@@ -1,0 +1,20 @@
+  [1m[36mSQL (28.9ms)[0m  [1mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (28.9ms)[0m  CREATE TABLE "categories" ("id" serial primary key, "name" character varying(255), "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (2.3ms)[0m  [1mCREATE TABLE "posts" ("id" serial primary key, "text" character varying(255), "user_id" integer, "thread_for_post_id" integer, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (0.9ms)[0m  CREATE  INDEX  "index_posts_on_thread_for_post_id" ON "posts" USING btree ("thread_for_post_id")
+  [1m[36m (0.8ms)[0m  [1mCREATE  INDEX  "index_posts_on_user_id" ON "posts" USING btree ("user_id")[0m
+  [1m[35m (2.6ms)[0m  CREATE TABLE "signatures" ("id" serial primary key, "user_id" integer, "content" character varying(255), "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (1.1ms)[0m  [1mCREATE  INDEX  "index_signatures_on_user_id" ON "signatures" USING btree ("user_id")[0m
+  [1m[35m (20.6ms)[0m  CREATE TABLE "thread_for_posts" ("id" serial primary key, "subject" character varying(255), "text" character varying(255), "category_id" integer, "user_id" integer, "stickied" boolean DEFAULT 'f', "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (1.6ms)[0m  [1mCREATE  INDEX  "index_thread_for_posts_on_category_id" ON "thread_for_posts" USING btree ("category_id")[0m
+  [1m[35m (1.4ms)[0m  CREATE  INDEX  "index_thread_for_posts_on_user_id" ON "thread_for_posts" USING btree ("user_id")
+  [1m[36m (6.1ms)[0m  [1mCREATE TABLE "users" ("id" serial primary key, "username" character varying(255), "first_name" character varying(255), "last_name" character varying(255), "password_digest" character varying(255), "city" character varying(255), "state" character varying(255), "email" character varying(255), "number_of_posts" integer, "clearance" character varying(255) DEFAULT 'registered', "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (1.5ms)[0m  CREATE TABLE "schema_migrations" ("version" character varying(255) NOT NULL) 
+  [1m[36m (1.4ms)[0m  [1mCREATE UNIQUE INDEX  "unique_schema_migrations" ON "schema_migrations"  ("version")[0m
+  [1m[35m (0.8ms)[0m  SELECT version FROM "schema_migrations"
+  [1m[36m (0.5ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20141219202951')[0m
+  [1m[35m (0.9ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20141219202737')
+  [1m[36m (0.4ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20141219202835')[0m
+  [1m[35m (0.4ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20141219202851')
+  [1m[36m (0.4ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20141219202943')[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.2ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
