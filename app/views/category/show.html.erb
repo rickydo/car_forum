@@ -1,0 +1,3 @@
+<% @threads.each do |thread| %>
+	<ul><li><%= link_to  thread.subject, category_thread_for_post_path(@category, thread)%></li></ul>
+<% end %>

@@ -1,0 +1,2 @@
+module ThreadForPostHelper
+end
