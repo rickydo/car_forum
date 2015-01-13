@@ -1,0 +1,13 @@
+<ul>
+	<li><%= @thread.subject %> <br>
+	<%= @thread.time_format %> <br>
+	<%= @thread.text %> <br>
+	<%= @thread.get_username %> <br>
+	</li>
+	<% @posts.each do |post| %>
+		
+			<li><%= post.text %><br>
+				<%= post.get_username %><br>
+				<%= post.time_format %><br></li>
+	<% end %>
+</ul>
